@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Aurnap.OrderManagement.Core.Entities;
+using System.Collections.Generic;
 
 namespace Aurnap.OrderManagement.Core {
-    public class Order {
+    public sealed class Order {
         public Order(IEnumerable<OrderLineItem> orderLineItems, ShippingAddress shippingAddress) {
             OrderLineItems = orderLineItems;
             ShippingAddress = shippingAddress;

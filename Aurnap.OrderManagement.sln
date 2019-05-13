@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurnap.OrderManagement.Core", "Aurnap.OrderManagement.Core\Aurnap.OrderManagement.Core.csproj", "{827A4E35-32DC-403B-8437-C37FB3629EC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurnap.OrderManagement.Core", "Aurnap.OrderManagement.Core\Aurnap.OrderManagement.Core.csproj", "{827A4E35-32DC-403B-8437-C37FB3629EC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurnap.OrderManagement.Core.Tests", "Aurnap.OrderManagement.Core.Tests\Aurnap.OrderManagement.Core.Tests.csproj", "{1211C866-A145-4DB8-AA59-4317A583DF5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{827A4E35-32DC-403B-8437-C37FB3629EC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{827A4E35-32DC-403B-8437-C37FB3629EC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{827A4E35-32DC-403B-8437-C37FB3629EC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1211C866-A145-4DB8-AA59-4317A583DF5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1211C866-A145-4DB8-AA59-4317A583DF5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1211C866-A145-4DB8-AA59-4317A583DF5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1211C866-A145-4DB8-AA59-4317A583DF5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

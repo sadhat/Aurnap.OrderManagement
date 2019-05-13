@@ -1,32 +1,36 @@
-﻿using System;
+﻿using Aurnap.OrderManagement.Core.Entities;
+using Aurnap.OrderManagement.Core.Interfaces;
 
 namespace Aurnap.OrderManagement.Core {
-    public partial class PriceCalculatorManager {
-        public PriceCalculatorManager(IOrderRespository orderRespository, IPricingService pricingService) {
+    public sealed class PriceCalculatorManager {
+        public PriceCalculatorManager(IOrderRespository orderRespository, ITaxService taxService) {
             OrderRespository = orderRespository;
-            PricingService = pricingService;
+            TaxService = taxService;
         }
 
-        public decimal GetTotal(int orderNumber) {
+        public double GetTotalPriceOf(int orderNumber) {
             Order order = OrderRespository.GetBy(orderNumber);
-            decimal total = 0;
-            foreach (var item in order.OrderLineItems) {
-                if (item.IsBogoHalfPrice) {
-                    if (item.BogoMaxLimit.HasValue) {
-                        total += item.Price * (decimal)Math.Ceiling(Math.Abs(item.Quantity - item.BogoMaxLimit.Value) / 2.0);
-                        if (item.BogoMaxLimit > item.Quantity) {
-                            total += item.Price * (decimal)(item.BogoMaxLimit - item.Quantity);
-                        }
-                    }
-                }
-                else {
-                    total += item.Price * item.Quantity;
-                }
+            double subTotal = 0;
+            foreach (var orderLineItem in order.OrderLineItems) {
+                subTotal += GetSubTotalOf(orderLineItem);
             }
-            return total;
+            double taxRate = TaxService.GetSalesTaxRate(order.ShippingAddress);
+            return subTotal + (subTotal * (taxRate / 100));
+        }
+
+        private static double GetSubTotalOf(OrderLineItem item) {
+            if (!item.IsBogoHalfPrice) return item.Price * item.Quantity;
+
+            var quantityOnSale = item.Quantity;
+            if (item.BogoMaxLimit.HasValue && item.Quantity >= item.BogoMaxLimit) {
+                quantityOnSale = item.BogoMaxLimit.Value;
+            }
+            quantityOnSale /= 2;
+            var quantityOnRegular = item.Quantity - quantityOnSale;
+            return (item.Price / 2 * quantityOnSale) + (item.Price * quantityOnRegular);
         }
 
         public IOrderRespository OrderRespository { get; }
-        public IPricingService PricingService { get; }
+        public ITaxService TaxService { get; }
     }
 }

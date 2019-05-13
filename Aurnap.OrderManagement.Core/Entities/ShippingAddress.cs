@@ -1,5 +1,5 @@
-﻿namespace Aurnap.OrderManagement.Core {
-    public class ShippingAddress {
+﻿namespace Aurnap.OrderManagement.Core.Entities {
+    public sealed class ShippingAddress {
         public ShippingAddress(string street, string city, string state, string zipCode) {
             Street = street;
             City = city;
